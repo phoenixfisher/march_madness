@@ -1,33 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import teamData from './CollegeBasketballTeams.json'
+import type { Team, CollegeBasketballData } from './Type'
 
-function App() {
-  const [count, setCount] = useState(0)
+function Header() {
+  return (
+    <header>
+      <h1>NCAA College Basketball Teams</h1>
+      <p>Explore schools, mascots, and locations for teams across college basketball.</p>
+    </header>
+  )
+}
 
+function Body({ teams }: { teams: Team[] }) {
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        {teams.map((team) => (
+          <div className="team-card" key={team.tid}>
+            <h2>{team.school}</h2>
+            <p>
+              <strong>Mascot:</strong> {team.name}
+            </p>
+            <p>
+              <strong>Location:</strong> {team.city}, {team.state}
+            </p>
+          </div>
+        ))}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    </>
+  )
+}
+
+function App() {
+  const data = teamData as CollegeBasketballData
+
+  return (
+    <>
+      <Header />
+      <Body teams={data.teams} />
     </>
   )
 }

@@ -40,3 +40,11 @@
 .read-the-docs {
   color: #888;
 }
+
+.team-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem;
+  text-align: left;
+}
